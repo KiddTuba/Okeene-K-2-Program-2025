@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okeene K-2 Winter Program</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap');
+
+        :root {
+            /* Columbia Blue & White Theme */
+            --columbia-blue: #B9D9EB; 
+            --ice-white: #F0F8FF;
+            --winter-navy: #003366;
+            --silver-accent: #A0A0A0;
+            --deep-black: #111111;
+            --paper-white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0B1020; /* Darker navy for night sky contrast */
+            font-family: 'Lato', sans-serif;
+            color: var(--deep-black);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Snow Animation Background */
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 1em;
+            font-family: Arial;
+            text-shadow: 0 0 2px #B9D9EB;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; }
+        }
+
+        /* Main Stage Container */
+        .main-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: var(--paper-white);
+            box-shadow: 0 0 50px rgba(185, 217, 235, 0.3); /* Blue glow */
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            border: 1px solid var(--columbia-blue);
+        }
+
+        /* Header Style */
+        .program-header {
+            background-color: var(--columbia-blue);
+            padding: 20px;
+            border-bottom: 4px solid var(--winter-navy);
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .program-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: var(--winter-navy);
+            letter-spacing: 1px;
+            line-height: 1.2;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Content Sections */
+        .content {
+            padding: 20px 20px 60px 20px;
+        }
+
+        .hero-graphic {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        /* CSS Graphics */
+        .tree-icon {
+            font-size: 4rem;
+            display: inline-block;
+            margin: 0 10px;
+            filter: drop-shadow(0px 0px 5px var(--columbia-blue));
+        }
+
+        .show-title-block {
+            text-align: center;
+            margin-bottom: 40px;
+            border: 4px double var(--columbia-blue);
+            padding: 20px;
+            border-radius: 8px;
+            background: var(--ice-white);
+        }
+
+        .show-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--winter-navy);
+            margin-bottom: 10px;
+        }
+
+        .show-date {
+            font-style: italic;
+            color: #555;
+        }
+
+        /* Program Acts */
+        .act-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            margin-top: 30px;
+        }
+
+        .act-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            background: var(--winter-navy);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 0 20px 0 20px;
+            box-shadow: 4px 4px 0px var(--columbia-blue);
+            border: 1px solid var(--columbia-blue);
+        }
+
+        .song-list {
+            list-style: none;
+            margin-left: 10px;
+            border-left: 3px solid var(--columbia-blue);
+            padding-left: 20px;
+        }
+
+        .song-item {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .song-number {
+            font-weight: bold;
+            color: var(--winter-navy); 
+            margin-right: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .song-title {
+            flex-grow: 1;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Cast / Thanks Section */
+        .credits-section {
+            margin-top: 50px;
+            background-color: var(--ice-white);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid var(--columbia-blue);
+            text-align: center;
+        }
+
+        .credits-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--winter-navy);
+            display: inline-block;
+            color: var(--winter-navy);
+        }
+
+        .credit-group {
+            margin-bottom: 20px;
+        }
+
+        .credit-role {
+            font-weight: bold;
+            color: #5B9BD5; /* Slightly darker blue for text legibility */
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+        }
+
+        .credit-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--deep-black);
+        }
+
+        .community-note {
+            margin-top: 30px;
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #444;
+            padding: 15px;
+            background: rgba(185, 217, 235, 0.2);
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #888;
+            padding-bottom: 20px;
+        }
+
+        /* Decorative Elements */
+        .holly-decoration {
+            text-align: center;
+            font-size: 2rem;
+            margin: 20px 0;
+            color: var(--columbia-blue);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .program-title { font-size: 1.5rem; }
+            .show-title { font-size: 1.6rem; }
+            .tree-icon { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Snow Effect Container -->
+    <div id="snow-container" class="snow-container"></div>
+
+    <div class="main-container">
+        <!-- Header -->
+        <header class="program-header">
+            <div class="program-title">Okeene Elementary School</div>
+            <div style="font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: var(--winter-navy);">Winter Program</div>
+        </header>
+
+        <div class="content">
+            <!-- Show Title Area -->
+            <div class="hero-graphic">
+                <span class="tree-icon">❄️</span>
+                <span class="tree-icon">☃️</span>
+                <span class="tree-icon">❄️</span>
+            </div>
+
+            <div class="show-title-block">
+                <h1 class="show-title">Winter Spectacular</h1>
+                <p class="show-date">Kindergarten - 2nd Grade Music</p>
+                <p style="margin-top:10px; font-size: 0.9rem;">Presenting a Holiday Celebration</p>
+            </div>
+
+            <!-- Kindergarten -->
+            <div class="act-header">
+                <h2>Kindergarten</h2>
+            </div>
+            <ul class="song-list">
+                <li class="song-item">
+                    <span class="song-number">1.</span>
+                    <span class="song-title">Five Little Reindeer</span>
+                </li>
+                <li class="song-item">
+                    <span class="song-number">2.</span>
+                    <span class="song-title">Santa is His Name O</span>
+                </li>
+                <li class="song-item">
+                    <span class="song-number">3.</span>
+                    <span class="song-title">Jingle Bells</span>
+                </li>
+            </ul>
+
+            <!-- First Grade -->
+            <div class="act-header">
+                <h2>First Grade</h2>
+            </div>
+            <ul class="song-list">
+                <li class="song-item">
+                    <span class="song-number">1.</span>
+                    <span class="song-title">Frosty The Snowman</span>
+                </li>
+                <li class="song-item">
+                    <span class="song-number">2.</span>
+                    <span class="song-title">You're A Mean One Mr. Grinch</span>
+                </li>
+                <li class="song-item">
+                    <span class="song-number">3.</span>
+                    <span class="song-title">Santa Claus is Coming to Town</span>
+                </li>
+            </ul>
+
+            <!-- Second Grade -->
+            <div class="act-header">
+                <h2>Second Grade</h2>
+            </div>
+            <ul class="song-list">
+                <li class="song-item">
+                    <span class="song-number">1.</span>
+                    <span class="song-title">Boogie Woogie Holiday</span>
+                </li>
+                <li class="song-item">
+                    <span class="song-number">2.</span>
+                    <span class="song-title">(You don't wanna know)</span>
+                </li>
+                <li class="song-item">
+                    <span class="song-number">3.</span>
+                    <span class="song-title">The Greatest Gift of All</span>
+                </li>
+            </ul>
+
+            <div class="holly-decoration">❄️ ❄️ ❄️</div>
+
+            <!-- Credits -->
+            <div class="credits-section">
+                <h3 class="credits-title">Special Thanks</h3>
+
+                <div class="credit-group">
+                    <div class="credit-role">Kindergarten Teachers</div>
+                    <div class="credit-name">Mrs. McGinn & Mrs. Wray</div>
+                </div>
+
+                <div class="credit-group">
+                    <div class="credit-role">First Grade Teachers</div>
+                    <div class="credit-name">Mrs. Unruh & Ms. Jenna</div>
+                </div>
+
+                <div class="credit-group">
+                    <div class="credit-role">Second Grade Teacher</div>
+                    <div class="credit-name">Mrs. Jinkens</div>
+                </div>
+
+                <div class="community-note">
+                    "Thank you to the wonderful Okeene community for your continued support of Arts education for our students."
+                </div>
+            </div>
+
+            <div class="footer">
+                &copy; 2025 Okeene Elementary Music Dept.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple JS to create falling snow
+        function createSnow() {
+            const container = document.getElementById('snow-container');
+            const snowflakeCount = 20;
+
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.innerHTML = '❄';
+                snowflake.classList.add('snowflake');
+                
+                // Random positioning and delay
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2-5s
+                snowflake.style.opacity = Math.random();
+                snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                
+                container.appendChild(snowflake);
+            }
+        }
+
+        window.onload = createSnow;
+    </script>
+</body>
+</html>
